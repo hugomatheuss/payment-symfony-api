@@ -4,16 +4,22 @@ namespace App\Entity;
 
 class Wallet
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column
+     */
     private $id;
 
-    #[ORM\OneToOne(targetEntity: 'User', inversedBy: 'wallet')]
-    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    /**
+     * @ORM\OneToOne(targetEntity="Entity/User", inversedBy="wallet")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     */
     private $user;
 
-    #[ORM\Column(type: 'float')]
+    /**
+     * @ORM\Column(type="float")
+     */
     private $balance;
 
     /**
