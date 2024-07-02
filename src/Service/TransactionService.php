@@ -8,7 +8,10 @@ use App\Repository\UserRepository;
 
 class TransactionService
 {
-    public function __construct(private readonly UserRepository $userRepository)
+    public function __construct(
+        private readonly UserRepository $userRepository,
+        private readonly WalletService $walletService,
+    )
     {
     }
 
@@ -24,16 +27,15 @@ class TransactionService
         if (!$this->validateUserCanTransfer($user)) {
             throw new \Exception('User cannot do this transaction!');
         }
+
+        if (!$this->validateUserWallet($user)) {
+            throw new \Exception('Invalid balance for this operation!');
+        }
     }
 
-    protected function validateUserWallet()
+    protected function validateUserWallet(User $user): bool
     {
-
-    }
-
-    protected function validateBalance()
-    {
-        //
+        return $this->walletService->checkBalance($user);
     }
 
     protected function validateUserCanTransfer(User $user): bool

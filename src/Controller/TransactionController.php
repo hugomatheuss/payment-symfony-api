@@ -23,11 +23,11 @@ class TransactionController extends AbstractController
 
             $this->transferService->validateTransaction($params);
 
-            /*return new JsonResponse([
-
-            ]);*/
+            return new JsonResponse([
+                'ok' => true
+            ]);
         } catch (\Exception $e) {
-            ;
+            var_export($e);
         }
     }
 }

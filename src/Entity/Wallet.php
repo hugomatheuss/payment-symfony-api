@@ -2,6 +2,10 @@
 
 namespace App\Entity;
 
+/**
+ * @ORM\Entity(repositoryClass="Repository/WalletRepository")
+ * @ORM\Table(name="wallet")
+ */
 class Wallet
 {
     /**
@@ -12,7 +16,7 @@ class Wallet
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Entity/User", inversedBy="wallet")
+     * @ORM\OneToOne(targetEntity="User", repositoryClass="Repository/WalletRepository", inversedBy="wallet")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
